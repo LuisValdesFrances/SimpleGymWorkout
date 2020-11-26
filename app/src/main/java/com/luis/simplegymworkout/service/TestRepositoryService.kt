@@ -2,7 +2,7 @@ package com.luis.simplegymworkout.service
 
 import com.luis.simplegymworkout.model.Exercise
 import com.luis.simplegymworkout.model.Group
-import com.luis.simplegymworkout.model.Repetition
+import com.luis.simplegymworkout.model.Series
 import com.luis.simplegymworkout.repository.TestRepository
 
 class TestRepositoryService : IRepositoryService {
@@ -22,12 +22,12 @@ class TestRepositoryService : IRepositoryService {
         return exercises
     }
 
-    override fun getRepetitions(groupName : String, exerciseName: String): ArrayList<Repetition> {
+    override fun getRepetitions(groupName : String, exerciseName: String): ArrayList<Series> {
         val exercises = this.getExercises(exerciseName)
         val exercisesFiltered = exercises.filter { exercise -> exerciseName == exercise.name}
-        val repetitions = ArrayList<Repetition>()
+        val repetitions = ArrayList<Series>()
         for(exercise in exercisesFiltered){
-            for(repetition in exercise.repetitions){
+            for(repetition in exercise.series){
                 repetitions.add(repetition)
             }
         }

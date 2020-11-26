@@ -3,7 +3,7 @@ package com.luis.simplegymworkout.repository
 import android.util.Log
 import com.luis.simplegymworkout.model.Exercise
 import com.luis.simplegymworkout.model.Group
-import com.luis.simplegymworkout.model.Repetition
+import com.luis.simplegymworkout.model.Series
 
 object TestRepository {
 
@@ -25,12 +25,12 @@ object TestRepository {
         for(group in groups){
             Log.d("Debug","Create group: ${group.name}")
             for(i in 1..6){
-                val exercise = Exercise(group.name, "Exercise $i", ArrayList<Repetition>())
+                val exercise = Exercise(group.name, "Exercise $i", ArrayList<Series>())
                 Log.d("Debug","Create exercise: ${exercise.name}")
                 for(j in 1..6){
-                    val repetition = Repetition(exercise.name, 10 * j, 5.0 * j)
-                    Log.d("Debug","Create repetition: rep:  ${repetition.repetition} weight ${repetition.weight}")
-                    exercise.repetitions.add(repetition)
+                    val repetition = Series(exercise.name, 10 * j, 5.0 * j)
+                    Log.d("Debug","Create series: rep:  ${repetition.repetition} weight ${repetition.weight}")
+                    exercise.series.add(repetition)
                 }
                 group.exercises.add(exercise)
             }

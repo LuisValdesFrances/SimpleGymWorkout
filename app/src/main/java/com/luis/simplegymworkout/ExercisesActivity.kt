@@ -61,7 +61,7 @@ class ExercisesActivity : AppCompatActivity(){
                 .setOnClickListener {
                     this.editExercise(group, exercise.name) }
 
-            val repetitionView = exerciseItem.findViewById<LinearLayout>(R.id.exerciseItemRepetitions)
+            val repetitionView = exerciseItem.findViewById<LinearLayout>(R.id.exerciseItemSeries)
             loadRepetitions(repetitionView, exercise)
             //Add exercise to group
             exerciseActivityExercises.addView(exerciseItem)
@@ -69,12 +69,12 @@ class ExercisesActivity : AppCompatActivity(){
     }
 
     private fun loadRepetitions(repetitionView : LinearLayout, exercise : Exercise) {
-        for(repetition in exercise.repetitions!!) {
+        for(repetition in exercise.series!!) {
             val repetitionItem = LayoutInflater.from(this)
-                .inflate(R.layout.repetition_item, null)
-            val weightView = repetitionItem.findViewById<TextView>(R.id.repetitionItemWeight)
+                .inflate(R.layout.series_item, null)
+            val weightView = repetitionItem.findViewById<TextView>(R.id.seriesItemWeight)
             weightView.text = repetition.weight.toString()
-            val repView = repetitionItem.findViewById<TextView>(R.id.repetitionItemRepetition)
+            val repView = repetitionItem.findViewById<TextView>(R.id.seriesItemRepetition)
             repView.text = repetition.repetition.toString()
             //Add repetition to exercise
             repetitionView.addView(repetitionItem)

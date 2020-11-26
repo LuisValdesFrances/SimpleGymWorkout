@@ -16,8 +16,8 @@
     <string name="exerciseDeleted">Ejercicio eliminado</string>
     <string name="confirmDeleteGroup">¿Realmente deseas eliminar este grupo?</string>
     <string name="confirmDeleteExercise">¿Realmente deseas eliminar este ejercicio?</string>
-    <string name="addRepetition">Añadir repetición</string>
-    <string name="deleteRepetition">Eliminar repetición</string>
-    <string name="kl">KL</string>
-    <string name="num">Nº</string>
+    <string name="addSeries">Añadir serie</string>
+    <string name="deleteSeries">Eliminar serie</string>
+    <string name="kl">KL:</string>
+    <string name="num">REP:</string>
 </resources>

@@ -8,26 +8,24 @@
         android:layout_marginHorizontal="5dp"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/repetitionItemWeight"
+            android:id="@+id/seriesItemWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/design_default_color_secondary"
             android:text="TEST KL"
-            android:textSize="20sp"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="5dp"
+            android:textSize="18sp"
+            android:padding="5dp"
             android:layout_marginVertical="5dp"
             android:gravity="center_horizontal" />
         <TextView
-            android:id="@+id/repetitionItemRepetition"
+            android:id="@+id/seriesItemRepetition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/design_default_color_secondary_variant"
             android:text="TEST REP"
-            android:textSize="20sp"
-            android:paddingHorizontal="5dp"
-            android:paddingVertical="5dp"
-            android:layout_marginVertical="10dp"
+            android:textSize="18sp"
+            android:padding="5dp"
+            android:layout_marginVertical="5dp"
             android:gravity="center_horizontal" />
     </LinearLayout>
 </LinearLayout>
