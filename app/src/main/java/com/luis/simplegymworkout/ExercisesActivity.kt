@@ -8,45 +8,47 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.luis.simplegymworkout.model.Exercise
-import com.luis.simplegymworkout.service.TestRepositoryService
+import com.luis.simplegymworkout.model.Series
+import com.luis.simplegymworkout.service.IMuscleService
+import com.luis.simplegymworkout.service.MuscleServiceImp
 import kotlinx.android.synthetic.main.exercises_activity.*
 
 class ExercisesActivity : AppCompatActivity(){
 
-    private val repositoryService = TestRepositoryService()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.exercises_activity)
+    }
 
-        val groupName = intent.getStringExtra("GROUP")
-        Log.d("Debug", "${groupName}: Init Exercise activity")
+    override fun onResume(){
+        super.onResume()
+        val muscleService = MuscleServiceImp.getInstance(applicationContext)
+        val muscleName = intent.getStringExtra("MUSCLE")
+        Log.d("Debug", "${muscleName}: Init Exercise activity")
 
-        exerciseActivityDeleteGroup.setOnClickListener {
-            UtilsUI.showAlert(this, R.string.confirmDeleteGroup, R.string.yes, R.string.not) {
-                this.repositoryService.deleteGroup(groupName)
-                UtilsUI.showToast(this, R.string.groupDeleted)
+        exerciseActivityDeleteMuscle.setOnClickListener {
+            UtilsUI.showAlert(this, R.string.confirmDeleteMuscle, R.string.yes, R.string.not) {
+
+                //TODO: Comprobar si se borra en cascada
+                muscleService.deleteMuscle(muscleName)
+
+                UtilsUI.showToast(this, R.string.muscleDeleted)
                 val intent = Intent(this, MainActivity::class.java)
                 this.startActivity(intent)
             }
         }
         exerciseActivityCreateExercise.setOnClickListener {
             val intent = Intent(this, CreateExerciseActivity::class.java).apply {
-                putExtra("GROUP", groupName)
+                putExtra("MUSCLE", muscleName)
             }
             this.startActivity(intent)
         }
-        this.loadGroup(groupName)
-        this.loadExercises(groupName)
+        exerciseActivityMuscle.text = muscleName
+        this.loadExercises(muscleName, muscleService)
     }
 
-    private fun loadGroup(group: String){
-        exerciseActivityGroup.text = group
-    }
-
-    private fun loadExercises(group: String){
-        val exercises = this.repositoryService.getExercises(group)
+    private fun loadExercises(muscleName: String, muscleService : IMuscleService){
+        val exercises = muscleService.getExercises(muscleName)
         for(exercise in exercises){
             val exerciseItem = LayoutInflater.from(this)
                 .inflate(R.layout.exercise_item, null)
@@ -56,20 +58,20 @@ class ExercisesActivity : AppCompatActivity(){
             //Add button listeners
             exerciseItem.findViewById<ImageButton>(R.id.exerciseItemExerciseDelete)
                 .setOnClickListener {
-                    this.deleteExercise(group, exercise.name) }
+                    this.deleteExercise(exercise.id, muscleService) }
             exerciseItem.findViewById<ImageButton>(R.id.exerciseItemExerciseEdit)
                 .setOnClickListener {
-                    this.editExercise(group, exercise.name) }
+                    this.editExercise(muscleName, exercise.id) }
 
             val repetitionView = exerciseItem.findViewById<LinearLayout>(R.id.exerciseItemSeries)
-            loadRepetitions(repetitionView, exercise)
+            this.loadSeries(repetitionView, muscleService.getSeries(exercise.id))
             //Add exercise to group
             exerciseActivityExercises.addView(exerciseItem)
         }
     }
 
-    private fun loadRepetitions(repetitionView : LinearLayout, exercise : Exercise) {
-        for(repetition in exercise.series!!) {
+    private fun loadSeries(repetitionView : LinearLayout, series : List<Series>) {
+        for(repetition in series) {
             val repetitionItem = LayoutInflater.from(this)
                 .inflate(R.layout.series_item, null)
             val weightView = repetitionItem.findViewById<TextView>(R.id.seriesItemWeight)
@@ -81,20 +83,22 @@ class ExercisesActivity : AppCompatActivity(){
         }
     }
 
-    private fun deleteExercise(groupName: String, exerciseName: String)
+    private fun deleteExercise(exerciseId : Int, muscleService : IMuscleService)
     {
-        this.repositoryService.deleteExercise(groupName, exerciseName)
+        muscleService.deleteExercise(exerciseId)
+        //TODO: Si se borra en cascada, no es necesario
+        muscleService.deleteSeriesFromExercise(exerciseId)
         UtilsUI.showAlert(this, R.string.confirmDeleteExercise, R.string.yes, R.string.not){
             finish()
             startActivity(intent)
         }
     }
 
-    private fun editExercise(groupName: String, exerciseName: String)
+    private fun editExercise(muscleName: String, exerciseId : Int)
     {
         val intent = Intent(this, EditExerciseActivity::class.java).apply {
-            this.putExtra("GROUP", groupName)
-            this.putExtra("EXERCISE", exerciseName)
+            this.putExtra("EXERCISE", exerciseId)
+            this.putExtra("MUSCLE", muscleName)
         }
         this.startActivity(intent)
     }

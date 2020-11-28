@@ -7,35 +7,35 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.luis.simplegymworkout.service.TestRepositoryService
+import com.luis.simplegymworkout.service.IMuscleService
+import com.luis.simplegymworkout.service.MuscleServiceImp
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val repositoryService = TestRepositoryService()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val muscleService = MuscleServiceImp.getInstance(applicationContext)
         Log.d("Debug", "Init APP")
         activityMainCreateGroup.setOnClickListener {
-            val intent = Intent(this, CreateGroupActivity::class.java)
+            val intent = Intent(this, CreateMuscleActivity::class.java)
             this.startActivity(intent)
         }
-        this.loadGroups()
+        this.loadGroups(muscleService)
     }
 
-    private fun loadGroups(){
-        val groups = this.repositoryService.getGroups()
-        for(group in groups){
+    private fun loadGroups(muscleService : IMuscleService){
+        val muscles = muscleService.getMuscles()
+        for(muscle in muscles){
             //Cargo el xml que contiene el componente textView
             var linearLayout = LayoutInflater.from(this)
-                .inflate(R.layout.group_item, null, false)
-            var textView = linearLayout.findViewById<TextView>(R.id.groupItemView)
-            textView.text = group.name
+                .inflate(R.layout.muscle_item, null, false)
+            var textView = linearLayout.findViewById<TextView>(R.id.muscleItemView)
+            textView.text = muscle.name
             textView.setOnClickListener {
                 val intent = Intent(this, ExercisesActivity::class.java).apply {
-                    putExtra("GROUP", group.name)
+                    putExtra("MUSCLE", muscle.name)
                 }
                 this.startActivity(intent)
             }

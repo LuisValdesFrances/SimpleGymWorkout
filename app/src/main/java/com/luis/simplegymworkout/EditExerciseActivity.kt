@@ -7,25 +7,27 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.luis.simplegymworkout.model.Exercise
 import com.luis.simplegymworkout.model.Series
-import com.luis.simplegymworkout.service.TestRepositoryService
+import com.luis.simplegymworkout.service.IMuscleService
+import com.luis.simplegymworkout.service.MuscleServiceImp
 import kotlinx.android.synthetic.main.create_exercise_activity.*
-import java.util.*
 
 class EditExerciseActivity : AppCompatActivity(){
-
-    private val repositoryService = TestRepositoryService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.create_exercise_activity)
-        val groupName = intent.getStringExtra("GROUP")
-        val exerciseName = intent.getStringExtra("EXERCISE")
-        createExerciseActivityLabel.text = this.resources.getString(R.string.editExercise)
-        createExerciseActivityExerciseName.setText(exerciseName)
+        val muscleService = MuscleServiceImp.getInstance(applicationContext)
+        val exerciseId = intent.getIntExtra("EXERCISE", 0)
+        val muscleName = intent.getStringExtra("MUSCLE")
 
-        val exercise = this.getExercise(groupName, exerciseName)!!
-        this.setRepetitions(exercise)
-        createExerciseDeleteRepetition.isEnabled = exercise.series.size > 0
+        val exercise = muscleService.getExercise(exerciseId)
+        val series = muscleService.getSeries(exerciseId)
+
+        createExerciseActivityLabel.text = this.resources.getString(R.string.editExercise)
+        createExerciseActivityExerciseName.setText(exercise.name)
+
+        this.setRepetitions(series)
+        createExerciseDeleteRepetition.isEnabled = series.size > 0
 
         createExerciseAddRepetition.setOnClickListener {
             addRepetition()
@@ -34,28 +36,15 @@ class EditExerciseActivity : AppCompatActivity(){
             this.deleteRepetition()
         }
         createExerciseActivityOk.setOnClickListener {
-            this.save(groupName)
+            this.save(muscleName, exercise, muscleService)
         }
         createExerciseActivityCancel.setOnClickListener {
-            val intent = Intent(this, ExercisesActivity::class.java).apply {
-                putExtra("GROUP", groupName)
-            }
-            this.startActivity(intent)
+            this.finish()
         }
     }
 
-    private fun getExercise(groupName: String, exerciseName: String) : Exercise? {
-        val exercises = repositoryService.getExercises(groupName)
-        exercises.forEach {
-            if(it.name == exerciseName){
-                return it
-            }
-        }
-        return null
-    }
-
-    private fun setRepetitions(exercise : Exercise){
-        for(repetition in exercise.series){
+    private fun setRepetitions(series : List<Series>){
+        for(repetition in series){
             val repetitionItem = LayoutInflater.from(this)
                     .inflate(R.layout.series_item_edit, null)
             repetitionItem.findViewById<EditText>(R.id.seriesItemEditWeight).setText(repetition.weight.toString())
@@ -78,12 +67,17 @@ class EditExerciseActivity : AppCompatActivity(){
         createExerciseDeleteRepetition.isEnabled = createExerciseRepetitions.childCount > 0
     }
 
-    private fun save(groupName : String){
+    private fun save(muscleName: String, exercise : Exercise, muscleService : IMuscleService){
         val name = createExerciseActivityExerciseName.text.toString()
         if(name.isEmpty()){
             UtilsUI.showToast(this, R.string.invalidName)
         } else {
-            val exercise = Exercise(groupName, name, ArrayList())
+            exercise.name = name
+            muscleService.updateExercise(exercise)
+
+            //Delete all series
+            muscleService.deleteSeriesFromExercise(exercise.id)
+
             for(i in 0 until createExerciseRepetitions.childCount){
                 val repetitionView = createExerciseRepetitions.getChildAt(i)
                 val rep =
@@ -94,14 +88,15 @@ class EditExerciseActivity : AppCompatActivity(){
                         if(!repetitionView.findViewById<EditText>(R.id.seriesItemEditWeight).text.isNullOrEmpty())
                             repetitionView.findViewById<EditText>(R.id.seriesItemEditWeight).text.toString()
                         else "0.0"
-                exercise.series.add(Series(exercise.name, Integer.parseInt(rep), weight.toDouble()))
+                muscleService.saveSeries(Series(0, exercise.id, Integer.parseInt(rep), weight.toDouble()))
             }
-            this.repositoryService.saveExercise(exercise)
+
             UtilsUI.showToast(this, R.string.exerciseSaved)
             val intent = Intent(this, ExercisesActivity::class.java).apply {
-                putExtra("GROUP", groupName)
+                putExtra("MUSCLE", muscleName)
             }
             this.startActivity(intent)
+            this.finish()
         }
     }
 }

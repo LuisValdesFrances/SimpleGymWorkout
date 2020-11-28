@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/groups"
+        android:text="@string/muscles"
         android:textSize="35sp"
         android:textStyle="bold"
         android:gravity="center_horizontal"/>
@@ -38,6 +38,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="@string/createGroup" />
+            android:text="@string/createMuscle" />
     </RelativeLayout>
 </LinearLayout>
