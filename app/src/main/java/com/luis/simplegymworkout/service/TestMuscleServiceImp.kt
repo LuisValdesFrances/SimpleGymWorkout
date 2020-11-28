@@ -56,6 +56,4 @@ class TestMuscleServiceImp : IMuscleService {
     override fun deleteSeriesFromExercise(exerciseId: Int) {
         TODO("Not yet implemented")
     }
-
-
 }

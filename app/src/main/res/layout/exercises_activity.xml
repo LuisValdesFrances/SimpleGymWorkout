@@ -8,12 +8,13 @@
     <TextView
         android:id="@+id/exerciseActivityMuscle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:background="@color/purple_200"
         android:text="TEST GROUP"
-        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         android:paddingHorizontal="10dp"
-        android:paddingVertical="5dp"
+        android:gravity="center_vertical"
         android:textStyle="bold"/>
     <ScrollView
         android:layout_width="match_parent"
@@ -29,6 +30,19 @@
             <!--LOAD EXERCISES HERE-->
         </LinearLayout>
     </ScrollView>
+
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-9871578065265688/4783296505">
+    </com.google.android.gms.ads.AdView>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

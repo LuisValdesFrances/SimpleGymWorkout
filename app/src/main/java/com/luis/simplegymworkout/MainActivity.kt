@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.luis.simplegymworkout.service.IMuscleService
+import com.google.android.gms.ads.MobileAds
 import com.luis.simplegymworkout.service.MuscleServiceImp
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,16 +16,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val muscleService = MuscleServiceImp.getInstance(applicationContext)
+        MobileAds.initialize(this) {}
+        val muscleService = MuscleServiceImp(applicationContext)
         Log.d("Debug", "Init APP")
         activityMainCreateGroup.setOnClickListener {
             val intent = Intent(this, CreateMuscleActivity::class.java)
             this.startActivity(intent)
+            this.finish()
         }
         this.loadGroups(muscleService)
     }
 
-    private fun loadGroups(muscleService : IMuscleService){
+    private fun loadGroups(muscleService : MuscleServiceImp){
         val muscles = muscleService.getMuscles()
         for(muscle in muscles){
             //Cargo el xml que contiene el componente textView
@@ -38,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                     putExtra("MUSCLE", muscle.name)
                 }
                 this.startActivity(intent)
+                this.finish()
             }
             if(textView.parent != null)
             {
@@ -45,5 +48,9 @@ class MainActivity : AppCompatActivity() {
             }
             activityMainGroups.addView(textView)
         }
+    }
+
+    override fun onBackPressed() {
+        this.finish()
     }
 }

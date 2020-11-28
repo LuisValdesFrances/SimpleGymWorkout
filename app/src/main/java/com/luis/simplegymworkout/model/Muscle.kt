@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "muscle")
 data class Muscle(
-    @PrimaryKey
-    @ColumnInfo(name = "name")
-    var name: String)
+        @PrimaryKey
+        @ColumnInfo(name = "name")
+        var name: String)

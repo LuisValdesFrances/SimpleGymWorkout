@@ -9,7 +9,7 @@ object TestMuscleDatabase {
 
     init {
         Log.d("Debug","################################")
-        Log.d("Debug","Create groupService as Singleton")
+        Log.d("Debug","Create test database as Singleton")
         Log.d("Debug","################################")
         this.groups = ArrayList()
         this.createDatabase(groups)

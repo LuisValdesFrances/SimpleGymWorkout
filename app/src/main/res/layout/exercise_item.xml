@@ -11,18 +11,18 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/purple_200"
+            android:background="@color/purple"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
-        <TextView
-            android:id="@+id/exerciseItemExercise"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TEST EXERCISE"
-            android:textSize="18sp"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="5dp"
-            android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/exerciseItemExercise"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="TEST EXERCISE"
+                android:textSize="20sp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="10dp"
+                android:textStyle="bold"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,9 +42,16 @@
                     android:layout_width="40dp"
                     android:layout_height="30dp"
                     android:layout_marginHorizontal="5dp"
-                    android:background="@color/orange"
+                    android:background="@color/blue"
                     android:src="@drawable/ic_edit_24"/>
-                <!--android:background="@color/design_default_color_secondary_variant"-->
+                <ImageButton
+                    android:id="@+id/exerciseItemExerciseChrono"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:background="@color/orange_dark"
+                    android:src="@drawable/ic_chrono_24"/>
+
             </LinearLayout>
         </RelativeLayout>
         <LinearLayout
@@ -64,7 +71,9 @@
                     android:textSize="18sp"
                     android:padding="5dp"
                     android:layout_marginVertical="5dp"
-                    android:background="@color/orange"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:background="@color/orange_dark"
                     android:gravity="center"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -73,10 +82,12 @@
                     android:textSize="18sp"
                     android:padding="5dp"
                     android:layout_marginVertical="5dp"
-                    android:background="@color/orange"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:background="@color/orange_dark"
                     android:gravity="center"/>
             </LinearLayout>
-                <!--SERIES-->
+            <!--SERIES-->
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

@@ -8,33 +8,39 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.luis.simplegymworkout.model.Series
-import com.luis.simplegymworkout.service.IMuscleService
 import com.luis.simplegymworkout.service.MuscleServiceImp
 import kotlinx.android.synthetic.main.exercises_activity.*
 
 class ExercisesActivity : AppCompatActivity(){
 
+    private var muscleName : String? = null
+    private var muscleService : MuscleServiceImp? = null
+    lateinit var mAdView : AdView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.exercises_activity)
-    }
 
-    override fun onResume(){
-        super.onResume()
-        val muscleService = MuscleServiceImp.getInstance(applicationContext)
-        val muscleName = intent.getStringExtra("MUSCLE")
-        Log.d("Debug", "${muscleName}: Init Exercise activity")
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
+        this.muscleName = intent.getStringExtra("MUSCLE")
+        this.muscleService = MuscleServiceImp(applicationContext)
+
+        Log.d("Debug", "${this.muscleName}: Create Exercise activity")
 
         exerciseActivityDeleteMuscle.setOnClickListener {
             UtilsUI.showAlert(this, R.string.confirmDeleteMuscle, R.string.yes, R.string.not) {
-
-                //TODO: Comprobar si se borra en cascada
-                muscleService.deleteMuscle(muscleName)
-
+                this.muscleService!!.deleteMuscle(this.muscleName!!)
                 UtilsUI.showToast(this, R.string.muscleDeleted)
+
                 val intent = Intent(this, MainActivity::class.java)
                 this.startActivity(intent)
+                this.finish()
             }
         }
         exerciseActivityCreateExercise.setOnClickListener {
@@ -42,12 +48,19 @@ class ExercisesActivity : AppCompatActivity(){
                 putExtra("MUSCLE", muscleName)
             }
             this.startActivity(intent)
+            this.finish()
         }
-        exerciseActivityMuscle.text = muscleName
-        this.loadExercises(muscleName, muscleService)
+        exerciseActivityMuscle.text = this.muscleName
+
+        this.cleanExercises()
+        this.loadExercises(this.muscleName!!, this.muscleService!!)
     }
 
-    private fun loadExercises(muscleName: String, muscleService : IMuscleService){
+    private fun cleanExercises(){
+        exerciseActivityExercises.removeAllViews()
+    }
+
+    private fun loadExercises(muscleName: String, muscleService : MuscleServiceImp){
         val exercises = muscleService.getExercises(muscleName)
         for(exercise in exercises){
             val exerciseItem = LayoutInflater.from(this)
@@ -62,6 +75,9 @@ class ExercisesActivity : AppCompatActivity(){
             exerciseItem.findViewById<ImageButton>(R.id.exerciseItemExerciseEdit)
                 .setOnClickListener {
                     this.editExercise(muscleName, exercise.id) }
+            exerciseItem.findViewById<ImageButton>(R.id.exerciseItemExerciseChrono)
+                .setOnClickListener {
+                    this.chrono(muscleName, exercise.id) }
 
             val repetitionView = exerciseItem.findViewById<LinearLayout>(R.id.exerciseItemSeries)
             this.loadSeries(repetitionView, muscleService.getSeries(exercise.id))
@@ -83,14 +99,11 @@ class ExercisesActivity : AppCompatActivity(){
         }
     }
 
-    private fun deleteExercise(exerciseId : Int, muscleService : IMuscleService)
-    {
-        muscleService.deleteExercise(exerciseId)
-        //TODO: Si se borra en cascada, no es necesario
-        muscleService.deleteSeriesFromExercise(exerciseId)
-        UtilsUI.showAlert(this, R.string.confirmDeleteExercise, R.string.yes, R.string.not){
-            finish()
-            startActivity(intent)
+    private fun deleteExercise(exerciseId : Int, muscleService : MuscleServiceImp){
+       UtilsUI.showAlert(this, R.string.confirmDeleteExercise, R.string.yes, R.string.not){
+           muscleService.deleteExercise(exerciseId)
+           this.cleanExercises()
+           this.loadExercises(this.muscleName!!, this.muscleService!!)
         }
     }
 
@@ -101,5 +114,20 @@ class ExercisesActivity : AppCompatActivity(){
             this.putExtra("MUSCLE", muscleName)
         }
         this.startActivity(intent)
+        this.finish()
+    }
+
+    private fun chrono(muscleName: String, exerciseId : Int){
+        val intent = Intent(this, ChronoActivity::class.java).apply {
+            this.putExtra("EXERCISE", exerciseId)
+            this.putExtra("MUSCLE", muscleName)
+        }
+        this.startActivity(intent)
+        this.finish()
+    }
+
+    override fun onBackPressed() {
+        this.startActivity(Intent(this, MainActivity::class.java))
+        this.finish()
     }
 }

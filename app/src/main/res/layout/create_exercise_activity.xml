@@ -10,8 +10,9 @@
         android:labelFor="@id/createExerciseActivityExerciseName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/createExercise"
         android:layout_margin="10dp"
+        android:text="@string/createExercise"
+        android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
         android:background="@color/purple_200"
@@ -63,7 +64,9 @@
                 android:textSize="16sp"
                 android:padding="5dp"
                 android:layout_marginVertical="2dp"
-                android:background="@color/orange"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:background="@color/orange_dark"
                 android:gravity="center"/>
             <TextView
                 android:layout_width="match_parent"
@@ -72,7 +75,9 @@
                 android:textSize="16sp"
                 android:padding="5dp"
                 android:layout_marginVertical="2dp"
-                android:background="@color/orange"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:background="@color/orange_dark"
                 android:gravity="center"/>
         </LinearLayout>
         <!--SERIES-->
@@ -99,14 +104,7 @@
             android:id="@+id/createExerciseActivityOk"
             android:layout_width="145dp"
             android:layout_height="wrap_content"
-            android:text="@string/ok"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <Button
-            android:id="@+id/createExerciseActivityCancel"
-            android:layout_width="145dp"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel"
+            android:text="@string/save"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>

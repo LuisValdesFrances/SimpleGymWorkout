@@ -9,13 +9,13 @@ import androidx.room.PrimaryKey
     foreignKeys = [ForeignKey(entity = Muscle::class,
         parentColumns = arrayOf("name"),
         childColumns = arrayOf("muscle_name"),
-        onDelete = ForeignKey.CASCADE)]
+        onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE)]
 )
 data class Exercise(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    var id : Int = 0,
-    @ColumnInfo(name = "muscle_name")
-    var muscleName: String,
-    @ColumnInfo(name = "name")
-    var name: String)
+        @PrimaryKey(autoGenerate = true)
+        @ColumnInfo(name = "id")
+        var id : Int = 0,
+        @ColumnInfo(name = "muscle_name")
+        var muscleName: String,
+        @ColumnInfo(name = "name")
+        var name: String)
