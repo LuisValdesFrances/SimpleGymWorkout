@@ -9,9 +9,9 @@
         android:orientation="vertical">
         <TextView
             android:id="@+id/seriesItemWeight"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="TEST KL"
+            android:text="1000"
             android:background="@color/orange_clear"
             android:textSize="18sp"
             android:padding="5dp"
@@ -19,9 +19,9 @@
             android:gravity="center_horizontal" />
         <TextView
             android:id="@+id/seriesItemRepetition"
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="TEST REP"
+            android:text="1000"
             android:background="@color/orange_clear"
             android:textSize="18sp"
             android:padding="5dp"

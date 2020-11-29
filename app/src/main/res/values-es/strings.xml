@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Simple Gym Workout</string>
+    <string name="yes">Si</string>
+    <string name="not">No</string>
+    <string name="errorSave">Error: No se ha podido guardar</string>
+    <string name="muscles">GRUPOS</string>
+    <string name="createMuscle">Nuevo Grupo</string>
+    <string name="createExercise">Nuevo</string>
+    <string name="editExercise">Editar Ejercicio</string>
+    <string name="delete">Eliminar</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="invalidName">Nombre no válido</string>
+    <string name="existNameMuscle">Ya existe un grupo con ese nombre</string>
+    <string name="existNameExercise">Ya existe un ejercicio con ese nombre</string>
+    <string name="muscleSaved">Grupo guardado</string>
+    <string name="exerciseSaved">Ejercicio guardado</string>
+    <string name="muscleDeleted">Grupo eliminado</string>
+    <string name="exerciseDeleted">Ejercicio eliminado</string>
+    <string name="confirmDeleteMuscle">¿Realmente deseas eliminar este grupo?</string>
+    <string name="confirmDeleteExercise">¿Realmente deseas eliminar este ejercicio?</string>
+    <string name="addSeries">Añadir Serie</string>
+    <string name="deleteSeries">Eliminar serie</string>
+    <string name="kl">KL:</string>
+    <string name="num">REP:</string>
+</resources>
