@@ -10,11 +10,11 @@ import com.luis.simplegymworkout.model.Series
 import com.luis.simplegymworkout.service.MuscleServiceImp
 import kotlinx.android.synthetic.main.create_exercise_activity.*
 
-class EditExerciseActivity : AppCompatActivity(){
+class EditExerciseActivity : AppCompatActivity() {
 
-    private var muscleName : String? = null
-    private var exerciseId : Int? = null
-    private var muscleService : MuscleServiceImp? = null
+    private var muscleName: String? = null
+    private var exerciseId: Int? = null
+    private var muscleService: MuscleServiceImp? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +44,8 @@ class EditExerciseActivity : AppCompatActivity(){
         }
     }
 
-    private fun setRepetitions(series : List<Series>){
-        for(repetition in series){
+    private fun setRepetitions(series: List<Series>) {
+        for (repetition in series) {
             val repetitionItem = LayoutInflater.from(this)
                     .inflate(R.layout.series_item_edit, null)
             repetitionItem.findViewById<EditText>(R.id.seriesItemEditWeight).setText(repetition.weight.toString())
@@ -54,26 +54,26 @@ class EditExerciseActivity : AppCompatActivity(){
         }
     }
 
-    private fun addRepetition(){
+    private fun addRepetition() {
         val repetitionItem = LayoutInflater.from(this)
                 .inflate(R.layout.series_item_edit, null)
         createExerciseRepetitions.addView(repetitionItem)
         createExerciseDeleteRepetition.isEnabled = true
     }
 
-    private fun deleteRepetition(){
+    private fun deleteRepetition() {
         createExerciseRepetitions.removeView(
-                createExerciseRepetitions.getChildAt(createExerciseRepetitions.childCount-1)
+                createExerciseRepetitions.getChildAt(createExerciseRepetitions.childCount - 1)
         )
         createExerciseDeleteRepetition.isEnabled = createExerciseRepetitions.childCount > 0
     }
 
-    private fun save(muscleName: String, exercise : Exercise, muscleService : MuscleServiceImp){
+    private fun save(muscleName: String, exercise: Exercise, muscleService: MuscleServiceImp) {
         val exerciseName = createExerciseActivityExerciseName.text.toString()
-        if(exerciseName.isEmpty()){
+        if (exerciseName.isEmpty()) {
             UtilsUI.showToast(this, R.string.invalidName)
         }
-        if(muscleService.isExerciseExist(muscleName, exercise.id, exerciseName)){
+        if (muscleService.isExerciseExist(muscleName, exercise.id, exerciseName)) {
             UtilsUI.showToast(this, R.string.existNameExercise)
             return
         }
@@ -84,14 +84,14 @@ class EditExerciseActivity : AppCompatActivity(){
         //Delete all series
         muscleService.deleteSeriesFromExercise(exercise.id)
 
-        for(i in 0 until createExerciseRepetitions.childCount){
+        for (i in 0 until createExerciseRepetitions.childCount) {
             val repetitionView = createExerciseRepetitions.getChildAt(i)
             val rep =
-                    if(!repetitionView.findViewById<EditText>(R.id.seriesItemEditRepetition).text.isNullOrEmpty())
+                    if (!repetitionView.findViewById<EditText>(R.id.seriesItemEditRepetition).text.isNullOrEmpty())
                         repetitionView.findViewById<EditText>(R.id.seriesItemEditRepetition).text.toString()
                     else "0"
             val weight =
-                    if(!repetitionView.findViewById<EditText>(R.id.seriesItemEditWeight).text.isNullOrEmpty())
+                    if (!repetitionView.findViewById<EditText>(R.id.seriesItemEditWeight).text.isNullOrEmpty())
                         repetitionView.findViewById<EditText>(R.id.seriesItemEditWeight).text.toString()
                     else "0.0"
             muscleService.saveSeries(Series(0, exercise.id, Integer.parseInt(rep), weight.toDouble()))
@@ -104,7 +104,7 @@ class EditExerciseActivity : AppCompatActivity(){
         returnToList()
     }
 
-    private fun returnToList(){
+    private fun returnToList() {
         val intent = Intent(this, ExercisesActivity::class.java).apply {
             putExtra("MUSCLE", muscleName)
         }
