@@ -23,4 +23,7 @@
     <string name="deleteSeries">Eliminar serie</string>
     <string name="kl">KL:</string>
     <string name="num">REP:</string>
+    <string name="development">Desarrollo:</string>
+    <string name="design">Diseño:</string>
+    <string name="allRights">All rights reserved</string>
 </resources>

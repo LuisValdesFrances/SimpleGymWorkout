@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background">
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
@@ -8,13 +11,12 @@
     <TextView
         android:id="@+id/chronoActivityExercise"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@color/purple_200"
+        android:layout_height="wrap_content"
         android:text="TEST GROUP"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:paddingHorizontal="10dp"
-        android:gravity="center_vertical"
+        android:textSize="25sp"
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal"
         android:textStyle="bold"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,9 +82,9 @@
                 android:textSize="18sp"
                 android:padding="5dp"
                 android:layout_marginVertical="5dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
+                android:background="@color/white"
                 android:textStyle="bold"
-                android:background="@color/orange_dark"
                 android:gravity="center"/>
             <TextView
                 android:layout_width="match_parent"
@@ -91,9 +93,9 @@
                 android:textSize="18sp"
                 android:padding="5dp"
                 android:layout_marginVertical="5dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
+                android:background="@color/white"
                 android:textStyle="bold"
-                android:background="@color/orange_dark"
                 android:gravity="center"/>
         </LinearLayout>
         <!--SERIES-->
@@ -126,5 +128,5 @@
             ads:adUnitId="ca-app-pub-9871578065265688/4783296505">
         </com.google.android.gms.ads.AdView>
     </RelativeLayout>
-
+</LinearLayout>
 </LinearLayout>

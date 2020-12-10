@@ -2,103 +2,93 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="20dp"
+    android:orientation="vertical">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
-        android:orientation="vertical">
-        <RelativeLayout
+        android:background="@color/background"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+        <TextView
+            android:id="@+id/exerciseItemExercise"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/purple"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp">
-            <TextView
-                android:id="@+id/exerciseItemExercise"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="TEST EXERCISE"
-                android:textSize="20sp"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="10dp"
-                android:textStyle="bold"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@id/exerciseItemExercise"
-                android:orientation="horizontal"
-                android:layout_centerVertical="true"
-                android:layout_alignEnd="@id/exerciseItemExercise">
-                <ImageButton
-                    android:id="@+id/exerciseItemExerciseDelete"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:layout_marginHorizontal="5dp"
-                    android:background="@color/red"
-                    android:src="@drawable/ic_delete_24"/>
-                <ImageButton
-                    android:id="@+id/exerciseItemExerciseEdit"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:layout_marginHorizontal="5dp"
-                    android:background="@color/blue"
-                    android:src="@drawable/ic_edit_24"/>
-                <ImageButton
-                    android:id="@+id/exerciseItemExerciseChrono"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:layout_marginHorizontal="5dp"
-                    android:background="@color/orange_dark"
-                    android:src="@drawable/ic_chrono_24"/>
-
-            </LinearLayout>
-        </RelativeLayout>
+            android:layout_height="40dp"
+            android:text="TEST EXERCISE"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="10dp"
+            android:textStyle="bold"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <!--SERIES LABEL-->
+            android:layout_alignRight="@id/exerciseItemExercise"
+            android:orientation="horizontal"
+            android:layout_centerVertical="true"
+            android:layout_alignEnd="@id/exerciseItemExercise">
+            <ImageButton
+                android:id="@+id/exerciseItemExerciseDelete"
+                style="@style/button_exercise_style"
+                android:layout_marginHorizontal="5dp"
+                android:src="@drawable/button_remove"/>
+            <ImageButton
+                android:id="@+id/exerciseItemExerciseEdit"
+                style="@style/button_exercise_style"
+                android:layout_marginHorizontal="5dp"
+                android:src="@drawable/button_edit"/>
+            <ImageButton
+                android:id="@+id/exerciseItemExerciseChrono"
+                style="@style/button_exercise_style"
+                android:layout_marginHorizontal="5dp"
+                android:src="@drawable/button_chrono"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!--SERIES LABEL-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kl"
+                android:textSize="18sp"
+                android:padding="5dp"
+                android:layout_marginVertical="5dp"
+                android:textColor="@color/black"
+                android:background="@color/white"
+                android:textStyle="bold"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/num"
+                android:textSize="18sp"
+                android:padding="5dp"
+                android:layout_marginVertical="5dp"
+                android:textColor="@color/black"
+                android:background="@color/white"
+                android:textStyle="bold"
+                android:gravity="center"/>
+        </LinearLayout>
+        <!--SERIES-->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <LinearLayout
+                android:id="@+id/exerciseItemSeries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/kl"
-                    android:textSize="18sp"
-                    android:padding="5dp"
-                    android:layout_marginVertical="5dp"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:background="@color/orange_dark"
-                    android:gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/num"
-                    android:textSize="18sp"
-                    android:padding="5dp"
-                    android:layout_marginVertical="5dp"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:background="@color/orange_dark"
-                    android:gravity="center"/>
+                android:orientation="horizontal">
+                <!--LOAD SERIES HERE-->
             </LinearLayout>
-            <!--SERIES-->
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:id="@+id/exerciseItemSeries"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <!--LOAD SERIES HERE-->
-                </LinearLayout>
-            </HorizontalScrollView>
-        </LinearLayout>
+        </HorizontalScrollView>
     </LinearLayout>
 </LinearLayout>

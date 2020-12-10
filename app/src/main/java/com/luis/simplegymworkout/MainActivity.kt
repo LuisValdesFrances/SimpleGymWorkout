@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.MobileAds
 import com.luis.simplegymworkout.service.MuscleServiceImp
@@ -15,12 +15,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         MobileAds.initialize(this) {}
         val muscleService = MuscleServiceImp(applicationContext)
         Log.d("Debug", "Init APP")
         activityMainCreateGroup.setOnClickListener {
             val intent = Intent(this, CreateMuscleActivity::class.java)
+            this.startActivity(intent)
+            this.finish()
+        }
+        activityMainInfo.setOnClickListener {
+            val intent = Intent(this, InfoActivity::class.java)
             this.startActivity(intent)
             this.finish()
         }
@@ -33,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             //Cargo el xml que contiene el componente textView
             var linearLayout = LayoutInflater.from(this)
                 .inflate(R.layout.muscle_item, null, false)
-            var textView = linearLayout.findViewById<TextView>(R.id.muscleItemView)
+            var textView = linearLayout.findViewById<Button>(R.id.muscleItemView)
             textView.text = muscle.name
             textView.setOnClickListener {
                 val intent = Intent(this, ExercisesActivity::class.java).apply {

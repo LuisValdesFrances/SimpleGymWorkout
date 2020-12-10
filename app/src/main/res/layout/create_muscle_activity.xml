@@ -1,40 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    android:orientation="vertical">
-    <TextView
-        android:labelFor="@id/createMuscleActivityGroupName"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/createMuscle"
+        android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:background="@color/purple_200"
-        android:gravity="center_horizontal"/>
-    <EditText
-        android:id="@+id/createMuscleActivityGroupName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:imeOptions="actionDone"
-        android:singleLine="true"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="bottom"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/createMuscleActivitySave"
-            android:layout_width="145dp"
+        android:orientation="vertical">
+        <TextView
+            android:labelFor="@id/createMuscleActivityGroupName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/save"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
+            android:text="@string/createMuscle"
+            android:layout_margin="10dp"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center_horizontal"/>
+        <EditText
+            android:id="@+id/createMuscleActivityGroupName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/white"
+            android:imeOptions="actionDone"
+            android:singleLine="true"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+            <Button
+                style="@style/button_basic_style"
+                app:backgroundTint="@null"
+                android:id="@+id/createMuscleActivitySave"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:textSize="18sp"
+                android:text="@string/save"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

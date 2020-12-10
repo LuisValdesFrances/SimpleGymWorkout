@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.SimpleGymWorkout" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <!-- <style name="Theme.SimpleGymWorkout" parent="Theme.MaterialComponents.DayNight.DarkActionBar"> -->
+    <style name="Theme.SimpleGymWorkout" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,5 +13,44 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="button_basic_style" parent="android:style/Widget.Button">
+        <item name="android:layout_width">280dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:state_focused">true</item>
+        <item name="android:state_pressed">true</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:text">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/button_basic_release</item>
+    </style>
+
+    <style name="button_plus_style" parent="android:style/Widget.ImageButton">
+        <item name="android:src">@drawable/button_plus</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="button_info_style" parent="android:style/Widget.ImageButton">
+        <item name="android:src">@drawable/button_info</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="button_exercise_style" parent="android:style/Widget.ImageButton">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:scaleType">fitXY</item>
     </style>
 </resources>

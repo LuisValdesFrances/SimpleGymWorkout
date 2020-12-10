@@ -14,4 +14,8 @@
     <color name="orange_clear">#ffe4b3</color>
     <color name="green">#AFFF9D</color>
     <color name="blue">#b3e0ff</color>
+
+    <color name="background">#131b23</color>
+    <color name="gray">#727272</color>
+    <color name="yellow">#f3d331</color>
 </resources>

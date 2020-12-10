@@ -1,12 +1,9 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="2dp"
-        android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="2dp"
+    android:orientation="vertical">
         <EditText
             android:id="@+id/seriesItemEditWeight"
             android:layout_width="50dp"
@@ -14,9 +11,11 @@
             android:inputType="number"
             android:maxLength="4"
             android:textSize="16sp"
-            android:layout_marginVertical="2dp"
+            android:layout_marginVertical="5dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/white"
             android:imeOptions="actionDone"
-            android:gravity="center_horizontal" />
+            android:gravity="center"/>
         <EditText
             android:id="@+id/seriesItemEditRepetition"
             android:layout_width="50dp"
@@ -24,8 +23,9 @@
             android:inputType="number"
             android:maxLength="4"
             android:textSize="16sp"
-            android:layout_marginVertical="2dp"
+            android:layout_marginVertical="5dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/white"
             android:imeOptions="actionDone"
-            android:gravity="center_horizontal" />
-    </LinearLayout>
+            android:gravity="center"/>
 </LinearLayout>
