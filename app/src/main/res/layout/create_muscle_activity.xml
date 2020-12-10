@@ -34,14 +34,10 @@
             android:gravity="bottom"
             android:orientation="horizontal">
             <Button
-                style="@style/button_basic_style"
+                style="@style/button_action_style"
                 app:backgroundTint="@null"
                 android:id="@+id/createMuscleActivitySave"
-                android:layout_width="140dp"
-                android:layout_height="40dp"
-                android:textSize="18sp"
                 android:text="@string/save"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"/>
         </RelativeLayout>
     </LinearLayout>

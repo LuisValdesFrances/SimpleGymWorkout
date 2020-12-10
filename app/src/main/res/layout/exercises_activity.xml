@@ -42,6 +42,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         ads:adSize="BANNER"
+        android:layout_marginVertical="10dp"
         ads:adUnitId="ca-app-pub-9871578065265688/4783296505">
     </com.google.android.gms.ads.AdView>
 
@@ -52,20 +53,14 @@
         android:orientation="horizontal">
         <Button
             android:id="@+id/exerciseActivityDeleteMuscle"
-            style="@style/button_basic_style"
+            style="@style/button_action_style"
             app:backgroundTint="@null"
-            android:layout_width="140dp"
-            android:layout_height="40dp"
-            android:textSize="18sp"
             android:layout_alignParentStart="true"
             android:text="@string/delete" />
         <Button
             android:id="@+id/exerciseActivityCreateExercise"
-            style="@style/button_basic_style"
+            style="@style/button_action_style"
             app:backgroundTint="@null"
-            android:layout_width="140dp"
-            android:layout_height="40dp"
-            android:textSize="18dp"
             android:layout_alignParentEnd="true"
             android:text="@string/createExercise" />
     </RelativeLayout>

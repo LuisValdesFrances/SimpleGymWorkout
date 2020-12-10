@@ -15,12 +15,24 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="button_basic_style" parent="android:style/Widget.Button">
+    <style name="button_muscle_style" parent="android:style/Widget.Button">
         <item name="android:layout_width">280dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:state_focused">true</item>
         <item name="android:state_pressed">true</item>
         <item name="android:textSize">24sp</item>
+        <item name="android:text">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/button_basic_release</item>
+    </style>
+
+    <style name="button_action_style" parent="android:style/Widget.Button">
+        <item name="android:layout_width">140dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:state_focused">true</item>
+        <item name="android:state_pressed">true</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:text">bold</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/black</item>
