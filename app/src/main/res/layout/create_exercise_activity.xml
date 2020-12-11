@@ -35,20 +35,14 @@
         android:orientation="horizontal">
         <Button
             android:id="@+id/createExerciseAddRepetition"
+            style="@style/button_action_style"
             app:backgroundTint="@null"
-            style="@style/button_muscle_style"
-            android:layout_width="140dp"
-            android:layout_height="40dp"
-            android:textSize="18sp"
             android:layout_alignParentStart="true"
             android:text="@string/addSeries"/>
         <Button
             android:id="@+id/createExerciseDeleteRepetition"
+            style="@style/button_action_style"
             app:backgroundTint="@null"
-            style="@style/button_muscle_style"
-            android:layout_width="140dp"
-            android:layout_height="40dp"
-            android:textSize="18sp"
             android:layout_alignParentEnd="true"
             android:enabled="false"
             android:text="@string/deleteSeries"/>
