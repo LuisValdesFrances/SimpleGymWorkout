@@ -5,7 +5,7 @@
     android:background="@drawable/background">
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_margin="10dp"
     android:orientation="vertical">
     <TextView
@@ -14,119 +14,124 @@
         android:layout_height="wrap_content"
         android:text="TEST GROUP"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="16sp"
         android:layout_margin="10dp"
         android:gravity="center_horizontal"
         android:textStyle="bold"/>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
-        android:orientation="vertical">
-        <Chronometer
-            android:id="@+id/chronoActivityChrono"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:background="#000"
-            android:gravity="center"
-            android:textSize="100sp"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+            <Chronometer
+                android:id="@+id/chronoActivityChrono"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="#000"
+                android:gravity="center"
+                android:textSize="100sp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
-            <!--android:layout_weight="1"-->
-            <ImageButton
-                android:id="@+id/chronoActivityStop"
-                android:layout_width="80dp"
-                android:layout_height="60dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@drawable/chrono_button"
-                android:src="@drawable/ic_stop_24"/>
-            <!--android:layout_weight="1"-->
-            <ImageButton
-                android:id="@+id/chronoActivityStart"
-                android:layout_width="80dp"
-                android:layout_height="60dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@drawable/chrono_button"
-                android:src="@drawable/ic_play_24"/>
-            <!--android:layout_weight="1"-->
-            <ImageButton
-                android:id="@+id/chronoActivityPause"
-                android:layout_width="80dp"
-                android:layout_height="60dp"
-                android:layout_marginHorizontal="10dp"
-                android:background="@drawable/chrono_button"
-                android:src="@drawable/ic_pause_24"/>
+                <!--android:layout_weight="1"-->
+                <ImageButton
+                    android:id="@+id/chronoActivityStop"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/chrono_button"
+                    android:src="@drawable/ic_stop_24"/>
+                <!--android:layout_weight="1"-->
+                <ImageButton
+                    android:id="@+id/chronoActivityStart"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/chrono_button"
+                    android:src="@drawable/ic_play_24"/>
+                <!--android:layout_weight="1"-->
+                <ImageButton
+                    android:id="@+id/chronoActivityPause"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/chrono_button"
+                    android:src="@drawable/ic_pause_24"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <!--SERIES LABEL-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/kl"
-                android:textSize="18sp"
-                android:padding="5dp"
-                android:layout_marginVertical="5dp"
-                android:textColor="@color/black"
-                android:background="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/num"
-                android:textSize="18sp"
-                android:padding="5dp"
-                android:layout_marginVertical="5dp"
-                android:textColor="@color/black"
-                android:background="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"/>
-        </LinearLayout>
-        <!--SERIES-->
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal">
+            <!--SERIES LABEL-->
             <LinearLayout
-                android:id="@+id/chronoActivitySeries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <!--LOAD SERIES HERE-->
+                android:layout_marginHorizontal="5dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/kl"
+                    android:textSize="18sp"
+                    android:padding="5dp"
+                    android:layout_marginVertical="5dp"
+                    android:textColor="@color/black"
+                    android:background="@color/white"
+                    android:textStyle="bold"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/num"
+                    android:textSize="18sp"
+                    android:padding="5dp"
+                    android:layout_marginVertical="5dp"
+                    android:textColor="@color/black"
+                    android:background="@color/white"
+                    android:textStyle="bold"
+                    android:gravity="center"/>
             </LinearLayout>
-        </HorizontalScrollView>
-    </LinearLayout>
+            <!--SERIES-->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/chronoActivitySeries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <!--LOAD SERIES HERE-->
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
-    <RelativeLayout
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:orientation="horizontal">
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-9871578065265688/4783296505">
-        </com.google.android.gms.ads.AdView>
-    </RelativeLayout>
+        android:gravity="center"
+        ads:adSize="BANNER"
+        android:layout_marginVertical="5dp"
+        ads:adUnitId="ca-app-pub-9871578065265688/4783296505">
+    </com.google.android.gms.ads.AdView>
 </LinearLayout>
 </LinearLayout>

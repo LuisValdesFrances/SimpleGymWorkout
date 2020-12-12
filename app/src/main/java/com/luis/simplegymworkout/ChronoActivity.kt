@@ -6,10 +6,12 @@ import android.os.SystemClock
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.luis.simplegymworkout.model.Series
 import com.luis.simplegymworkout.service.MuscleServiceImp
+import com.luis.simplegymworkout.viewmodel.ChronoViewModel
 import kotlinx.android.synthetic.main.chrono_activity.*
 
 class ChronoActivity : AppCompatActivity(){
@@ -18,11 +20,13 @@ class ChronoActivity : AppCompatActivity(){
     private var exerciseId : Int? = null
     private var muscleService : MuscleServiceImp? = null
     lateinit var mAdView : AdView
-    private var pasuseTime : Long = 0;
+    lateinit var chronoViewModel : ChronoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.chrono_activity)
+
+        this.chronoViewModel = ViewModelProvider(this).get(ChronoViewModel::class.java)
 
         mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
@@ -36,33 +40,60 @@ class ChronoActivity : AppCompatActivity(){
         chronoActivityStop.isEnabled = false
         chronoActivityPause.isEnabled = false
 
+        when(this.chronoViewModel.state){
+            ChronoViewModel.State.RUN -> {
+                chronoActivityChrono.base =SystemClock.elapsedRealtime() + this.chronoViewModel.currentTime
+                chronoActivityChrono.start()
+                this.start()
+            }
+            ChronoViewModel.State.PAUSE -> {
+                chronoActivityChrono.base = SystemClock.elapsedRealtime() + this.chronoViewModel.currentTime
+                this.pause()
+            }
+        }
+
         chronoActivityStart.setOnClickListener {
-            chronoActivityChrono.base = (SystemClock.elapsedRealtime() + pasuseTime)
+            this.chronoViewModel.state = ChronoViewModel.State.RUN
+            chronoActivityChrono.base = (SystemClock.elapsedRealtime() + this.chronoViewModel.currentTime)
             chronoActivityChrono.start()
-            chronoActivityStart.isEnabled = false
-            chronoActivityStop.isEnabled = true
-            chronoActivityPause.isEnabled = true
+            this.start()
         }
         chronoActivityStop.setOnClickListener {
-            this.pasuseTime = 0
+            this.chronoViewModel.state = ChronoViewModel.State.STOP
+            this.chronoViewModel.currentTime = 0
             chronoActivityChrono.base = SystemClock.elapsedRealtime();
             chronoActivityChrono.stop()
-            chronoActivityStart.isEnabled = true
-            chronoActivityStop.isEnabled = false
-            chronoActivityPause.isEnabled = false
+            this.stop()
         }
         chronoActivityPause.setOnClickListener {
-            this.pasuseTime = chronoActivityChrono.base - SystemClock.elapsedRealtime()
+            this.chronoViewModel.state = ChronoViewModel.State.PAUSE
+            this.chronoViewModel.currentTime = chronoActivityChrono.base - SystemClock.elapsedRealtime()
             chronoActivityChrono.stop()
-            chronoActivityStart.isEnabled = true
-            chronoActivityStop.isEnabled = true
-            chronoActivityPause.isEnabled = false
+            this.pause()
         }
         val exercise = this.muscleService!!.getExercise(this.exerciseId!!)
 
         chronoActivityExercise.text = exercise.name
         val series = this.muscleService!!.getSeries(this.exerciseId!!)
         this.loadSeries(series)
+    }
+
+    private fun start() {
+        chronoActivityStart.isEnabled = false
+        chronoActivityStop.isEnabled = true
+        chronoActivityPause.isEnabled = true
+    }
+
+    private fun stop() {
+        chronoActivityStart.isEnabled = true
+        chronoActivityStop.isEnabled = false
+        chronoActivityPause.isEnabled = false
+    }
+
+    private fun pause() {
+        chronoActivityStart.isEnabled = true
+        chronoActivityStop.isEnabled = true
+        chronoActivityPause.isEnabled = false
     }
 
     private fun loadSeries(series : List<Series>) {
@@ -79,6 +110,13 @@ class ChronoActivity : AppCompatActivity(){
 
     override fun onBackPressed() {
         returnToList()
+    }
+
+    override fun onStop(){
+        super.onStop()
+        if(this.chronoViewModel.state == ChronoViewModel.State.RUN){
+            this.chronoViewModel.currentTime = chronoActivityChrono.base - SystemClock.elapsedRealtime()
+        }
     }
 
     private fun returnToList(){
